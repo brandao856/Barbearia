@@ -633,9 +633,65 @@
             animation: none;
         }
         
+        /* MAPA */
+        .mapa-container {
+            margin: 60px 0 40px;
+            padding: 25px;
+            background: #111;
+            border: 1px solid rgba(192,192,192,0.2);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mapa-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, rgba(192,192,192,0.2), transparent);
+            border-radius: 32px;
+            z-index: -1;
+            animation: borderGlow 3s infinite;
+        }
+        
+        .mapa-titulo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .mapa-titulo h3 {
+            font-size: 28px;
+            color: #FFF;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+        }
+        
+        .mapa-titulo p {
+            color: #B0B0B0;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        
+        .mapa-wrapper {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(192,192,192,0.2);
+        }
+        
+        .mapa-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
         /* FOOTER */
         footer {
-            margin-top: 80px;
+            margin-top: 40px;
             padding: 50px 0 20px;
             border-top: 1px solid rgba(192,192,192,0.1);
             position: relative;
@@ -875,11 +931,6 @@
                     <div class="price-value">R$ 40<small>,00</small></div>
                     <button class="btn-card agendar-btn" data-servico="Corte e Limpeza de Pele">AGENDAR</button>
                 </div>
-                <div class="price-card">
-                    <h3>CORTE + SKINCARE</h3>
-                    <div class="price-value">R$ 45<small>,00</small></div>
-                    <button class="btn-card agendar-btn" data-servico="Corte e Skincare">AGENDAR</button>
-                </div>
             </div>
         </section>
 
@@ -981,7 +1032,6 @@
                                     <option value="Corte e Pigmentação">CORTE + PIGMENTAÇÃO - R$40</option>
                                     <option value="Corte e Hidratação">CORTE + HIDRATAÇÃO - R$45</option>
                                     <option value="Corte e Limpeza de Pele">CORTE + LIMPEZA DE PELE - R$40</option>
-                                    <option value="Corte e Skincare">CORTE + SKINCARE - R$45</option>
                                 </optgroup>
                                 <optgroup label="BARBA">
                                     <option value="Barba Completa">BARBA COMPLETA - R$35</option>
@@ -1019,6 +1069,28 @@
                     </div>
                     <button type="submit" class="btn-submit">CONFIRMAR</button>
                 </form>
+            </div>
+        </section>
+
+        <!-- MAPA GOOGLE MAPS INTERATIVO -->
+        <section class="mapa-container" data-aos="fade-up">
+            <div class="mapa-titulo">
+                <h3><span>✦</span> COMO CHEGAR <span>✦</span></h3>
+                <p><i class="fas fa-map-marker-alt" style="color: #C0C0C0; margin-right: 5px;"></i> Ao lado da Duda Sorveteria - Rua Raimundo G. de Morães, Av. São Tomé, 022A, Salinópolis - PA</p>
+            </div>
+            <div class="mapa-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.847178692105!2d-47.3456!3d-0.6276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a5f8f8f8f8f8f8%3A0x123456789abcdef!2sSalin%C3%B3polis%2C%20State%20of%20Par%C3%A1!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Localização da Barbearia Brandão em Salinópolis"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=-0.6276,-47.3456" target="_blank" style="color: #C0C0C0; text-decoration: none; border: 1px solid #C0C0C0; padding: 8px 20px; border-radius: 40px; display: inline-block; transition: all 0.3s;" onmouseover="this.style.background='#C0C0C0'; this.style.color='#0A0A0A';" onmouseout="this.style.background='transparent'; this.style.color='#C0C0C0';">
+                    <i class="fas fa-directions"></i> Abrir no Google Maps
+                </a>
             </div>
         </section>
 
