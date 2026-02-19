@@ -907,7 +907,7 @@
             </div>
         </section>
 
-        <!-- PROFISSIONAIS (SÓ BRANDÃO) -->
+        <!-- PROFISSIONAIS -->
         <section id="profissionais">
             <div class="section-header">
                 <h2 class="section-title"><span>✦</span> PROFISSIONAL <span>✦</span></h2>
@@ -917,14 +917,14 @@
                 <div class="profissional-card">
                     <div class="profissional-nome">BRANDÃO</div>
                     <div class="cargo">MASTER BARBER</div>
-                    <div style="color:#C0C0C0; font-size: 22px; margin: 20px 0;">
+                    <div style="color:#C0C0C0; font-size: 22px; margin:20px 0;">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <div style="font-size: 18px; font-style: italic; color: #DDD; max-width: 400px; margin: 0 auto;">
-                        "Tradição e excelência em cada movimento. Especialista em cortes clássicos e tratamentos premium."
+                    <div style="font-size: 18px; font-style: italic; color: #DDD; max-width:400px; margin:0 auto;">
+                        "Tradição e excelência em cada movimento."
                     </div>
-                    <div style="margin-top: 20px;">
-                        <a href="https://www.instagram.com/brandaoo__?igsh=Njc0dGV6Ymgxa2cx" target="_blank" style="color: #C0C0C0; text-decoration: none; font-size: 16px; border: 1px solid #C0C0C0; padding: 10px 25px; border-radius: 40px; display: inline-block; transition: all 0.3s;" onmouseover="this.style.background='#C0C0C0'; this.style.color='#0A0A0A';" onmouseout="this.style.background='transparent'; this.style.color='#C0C0C0';">
+                    <div style="margin-top:20px;">
+                        <a href="https://www.instagram.com/brandaoo__?igsh=Njc0dGV6Ymgxa2cx" target="_blank" style="color:#C0C0C0; text-decoration:none; font-size:16px; border:1px solid #C0C0C0; padding:10px 25px; border-radius:40px; display:inline-block;">
                             <i class="fab fa-instagram"></i> @brandaoo__
                         </a>
                     </div>
@@ -1059,7 +1059,7 @@
         const horariosFixos = ['09:00','10:00','11:00','15:00','16:00','17:00','18:00','19:00','20:00'];
 
         // ============================================
-        // CARREGAR HORÁRIOS DO BANCO DE DADOS (AGORA COMPARTILHADO!)
+        // CARREGAR HORÁRIOS DO BANCO DE DADOS
         // ============================================
         async function carregarHorarios() {
             const data = document.getElementById('data').value;
@@ -1105,7 +1105,7 @@
                 
             } catch (error) {
                 console.error('Erro ao carregar horários:', error);
-                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Verifique o banco de dados.</div>';
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Verifique a conexão.</div>';
             }
         }
 
@@ -1182,7 +1182,6 @@
                 }
                 
                 try {
-                    // Verificar se horário já está ocupado no banco
                     const { data: ocupados, error: checkError } = await supabase
                         .from('agendamentos')
                         .select('*')
@@ -1197,7 +1196,6 @@
                         return;
                     }
                     
-                    // Inserir no banco de dados
                     const { error: insertError } = await supabase
                         .from('agendamentos')
                         .insert([dados]);
@@ -1226,7 +1224,7 @@
                     
                 } catch (error) {
                     console.error('Erro ao agendar:', error);
-                    alert('Erro ao realizar agendamento. Verifique se a tabela "agendamentos" existe no Supabase.');
+                    alert('Erro ao realizar agendamento. Tente novamente.');
                 }
             });
             
