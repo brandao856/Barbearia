@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- SUPABASE CLIENT -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -638,7 +635,7 @@
         
         /* FOOTER */
         footer {
-            margin-top: 40px;
+            margin-top: 80px;
             padding: 50px 0 20px;
             border-top: 1px solid rgba(192,192,192,0.1);
             position: relative;
@@ -1027,6 +1024,7 @@
                     <div style="color:#C0C0C0;">BARBER</div>
                 </div>
                 <div class="footer-info">
+                    <div><i class="fas fa-map-marker-alt"></i> Salinópolis, PA</div>
                     <div><i class="fas fa-phone-alt"></i> (91) 98560-1098</div>
                 </div>
                 <div class="footer-info">
@@ -1044,23 +1042,15 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ============================================
-        // CONFIGURAÇÃO DO SUPABASE (BANCO DE DADOS REAL)
-        // ============================================
-        const SUPABASE_URL = 'https://zskokycjgzedmztyimtj.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpza29reWNqZ3plZG16dHlpbXRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1NzYwMDAsImV4cCI6MjA1ODE1MjAwMH0.dummykeyforbrandaobarber';
-        
-        // Inicializar cliente Supabase
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
         AOS.init({ once: true, duration: 800, offset: 100 });
         
+        // ============================================
+        // LOCALSTORAGE (FUNCIONA PERFEITAMENTE)
+        // ============================================
+        let agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
         const horariosFixos = ['09:00','10:00','11:00','15:00','16:00','17:00','18:00','19:00','20:00'];
 
-        // ============================================
-        // CARREGAR HORÁRIOS DO BANCO DE DADOS
-        // ============================================
-        async function carregarHorarios() {
+        function carregarHorarios() {
             const data = document.getElementById('data').value;
             const container = document.getElementById('horariosContainer');
             
@@ -1069,6 +1059,7 @@
                 return;
             }
             
+            // Verifica se é domingo (0) ou segunda (1)
             const dataObj = new Date(data + 'T12:00:00');
             const diaSemana = dataObj.getDay();
             
@@ -1077,35 +1068,20 @@
                 return;
             }
             
-            try {
-                const { data: agendamentosDB, error } = await supabase
-                    .from('agendamentos')
-                    .select('horario')
-                    .eq('data', data);
-                
-                if (error) throw error;
-                
-                const horariosOcupados = agendamentosDB.map(a => a.horario);
-                
-                container.innerHTML = horariosFixos.map(horario => {
-                    const ocupado = horariosOcupados.includes(horario);
-                    return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
-                        data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
-                }).join('');
-                
-                document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
-                        this.classList.add('selecionado');
-                        document.getElementById('horarioSelecionado').value = this.dataset.horario;
-                        atualizarResumo();
-                    });
+            container.innerHTML = horariosFixos.map(horario => {
+                const ocupado = agendamentos.some(a => a.data === data && a.horario === horario);
+                return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
+                    data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
+            }).join('');
+            
+            document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
+                    this.classList.add('selecionado');
+                    document.getElementById('horarioSelecionado').value = this.dataset.horario;
+                    atualizarResumo();
                 });
-                
-            } catch (error) {
-                console.error('Erro ao carregar horários:', error);
-                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Tente novamente.</div>';
-            }
+            });
         }
 
         function atualizarResumo() {
@@ -1127,12 +1103,12 @@
 
         window.fecharModal = () => document.getElementById('modalConfirmacao').classList.remove('active');
 
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('data').value = hoje;
             document.getElementById('data').min = hoje;
             
-            await carregarHorarios();
+            carregarHorarios();
             
             document.getElementById('data').addEventListener('change', function() {
                 carregarHorarios();
@@ -1156,10 +1132,11 @@
                 });
             });
             
-            document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 const dados = {
+                    id: Date.now(),
                     nome: document.getElementById('nome').value,
                     whatsapp: document.getElementById('whatsapp').value,
                     servico: document.getElementById('servico').value,
@@ -1173,6 +1150,14 @@
                     return;
                 }
                 
+                // Verificar se horário está ocupado
+                if (agendamentos.some(a => a.data === dados.data && a.horario === dados.horario)) {
+                    alert('Horário ocupado! Escolha outro.');
+                    carregarHorarios();
+                    return;
+                }
+                
+                // Verificar dia da semana
                 const dataObj = new Date(dados.data + 'T12:00:00');
                 const diaSemana = dataObj.getDay();
                 if (diaSemana === 0 || diaSemana === 1) {
@@ -1180,50 +1165,33 @@
                     return;
                 }
                 
-                try {
-                    const { data: ocupados, error: checkError } = await supabase
-                        .from('agendamentos')
-                        .select('*')
-                        .eq('data', dados.data)
-                        .eq('horario', dados.horario);
-                    
-                    if (checkError) throw checkError;
-                    
-                    if (ocupados && ocupados.length > 0) {
-                        alert('Este horário acabou de ser ocupado! Escolha outro.');
-                        await carregarHorarios();
-                        return;
-                    }
-                    
-                    const { error: insertError } = await supabase
-                        .from('agendamentos')
-                        .insert([dados]);
-                    
-                    if (insertError) throw insertError;
-                    
-                    const dataFormatada = dataObj.toLocaleDateString('pt-BR');
-                    
-                    const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
-                    
-                    window.open(`https://wa.me/5591985601098?text=${mensagem}`, '_blank');
-                    
-                    document.getElementById('modalDetalhes').innerHTML = `
-                        <div>✅ ${dados.nome}, agendamento confirmado!</div>
-                        <div style="color:#C0C0C0;">${dados.servico}</div>
-                        <div>${dataFormatada} • ${dados.horario}</div>
-                    `;
-                    document.getElementById('modalConfirmacao').classList.add('active');
-                    
-                    this.reset();
-                    document.getElementById('data').value = hoje;
-                    document.getElementById('horarioSelecionado').value = '';
-                    
-                    await carregarHorarios();
-                    atualizarResumo();
-                    
-                } catch (error) {
-                    alert('Erro ao agendar. Tente novamente.');
-                }
+                // Salvar no localStorage
+                agendamentos.push(dados);
+                localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+                
+                // Formatar data para mensagem
+                const dataFormatada = dataObj.toLocaleDateString('pt-BR');
+                
+                // Criar mensagem para WhatsApp
+                const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
+                
+                // Abrir WhatsApp
+                window.open(`https://wa.me/5591985601098?text=${mensagem}`, '_blank');
+                
+                // Mostrar modal de confirmação
+                document.getElementById('modalDetalhes').innerHTML = `
+                    <div>✅ ${dados.nome}, agendamento confirmado!</div>
+                    <div style="color:#C0C0C0; margin: 10px 0;">${dados.servico}</div>
+                    <div style="font-size: 20px;">${dataFormatada} • ${dados.horario}</div>
+                `;
+                document.getElementById('modalConfirmacao').classList.add('active');
+                
+                // Reset do formulário
+                this.reset();
+                document.getElementById('data').value = hoje;
+                document.getElementById('horarioSelecionado').value = '';
+                carregarHorarios();
+                atualizarResumo();
             });
             
             document.getElementById('backToTop').addEventListener('click', () => 
