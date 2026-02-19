@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
+        /* (todo seu CSS continua igual - mantenha o que você já tem) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
@@ -905,7 +906,7 @@
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
     <div class="container">
-        <!-- HEADER COM NOVA LOGO -->
+        <!-- HEADER -->
         <header>
             <div style="display:flex; justify-content:center; margin:40px 0;">
                 <a href="https://ibb.co/pj2wNhpv" target="_blank">
@@ -989,7 +990,7 @@
             </div>
         </section>
 
-        <!-- PROFISSIONAIS (SÓ BRANDÃO) -->
+        <!-- PROFISSIONAIS -->
         <section id="profissionais">
             <div class="section-header">
                 <h2 class="section-title"><span>✦</span> PROFISSIONAL <span>✦</span></h2>
@@ -1106,7 +1107,7 @@
             </div>
         </section>
 
-        <!-- MAPA GOOGLE MAPS INTERATIVO -->
+        <!-- MAPA -->
         <section class="mapa-container" data-aos="fade-up">
             <div class="mapa-titulo">
                 <h3><span>✦</span> COMO CHEGAR <span>✦</span></h3>
@@ -1155,16 +1156,19 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================
-        // SUPABASE - HORÁRIOS COMPARTILHADOS
+        // SUPABASE - CORRIGIDO (SEM DUPLICIDADE)
         // ============================================
+        
+        // Configurações do Supabase
         const SUPABASE_URL = 'https://kidwmyvmcnolesacnqok.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpZHdteXZtY25vbGVzYWNucW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0Njk0ODksImV4cCI6MjA4NzA0NTQ4OX0.jWVC_wjUdOaO3JegiOactbBRMIf5Dd3W5wxCYrl9T2E';
         
-        // Inicializar cliente Supabase
+        // Inicializar cliente Supabase - UMA ÚNICA VEZ
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         console.log('✅ Supabase conectado - horários em tempo real!');
         
+        // Inicializar AOS
         AOS.init({ once: true, duration: 800, offset: 100 });
         
         // Função para gerar horários de 30 em 30 minutos
