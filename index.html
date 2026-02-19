@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- SUPABASE CLIENT -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -633,62 +636,6 @@
             animation: none;
         }
         
-        /* MAPA */
-        .mapa-container {
-            margin: 60px 0 40px;
-            padding: 25px;
-            background: #111;
-            border: 1px solid rgba(192,192,192,0.2);
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mapa-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(192,192,192,0.2), transparent);
-            border-radius: 32px;
-            z-index: -1;
-            animation: borderGlow 3s infinite;
-        }
-        
-        .mapa-titulo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .mapa-titulo h3 {
-            font-size: 28px;
-            color: #FFF;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 2px;
-        }
-        
-        .mapa-titulo p {
-            color: #B0B0B0;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-        
-        .mapa-wrapper {
-            width: 100%;
-            height: 350px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(192,192,192,0.2);
-        }
-        
-        .mapa-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        
         /* FOOTER */
         footer {
             margin-top: 40px;
@@ -876,7 +823,7 @@
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
     <div class="container">
-        <!-- HEADER COM NOVA LOGO -->
+        <!-- HEADER -->
         <header>
             <div style="display:flex; justify-content:center; margin:40px 0;">
                 <a href="https://ibb.co/pj2wNhpv" target="_blank">
@@ -931,6 +878,12 @@
                     <div class="price-value">R$ 40<small>,00</small></div>
                     <button class="btn-card agendar-btn" data-servico="Corte e Limpeza de Pele">AGENDAR</button>
                 </div>
+                <div class="price-card">
+                    <h3>COMBO</h3>
+                    <div class="price-value">R$ 40<small>,00</small></div>
+                    <ul><li>Corte + Barba</li></ul>
+                    <button class="btn-card agendar-btn" data-servico="Combo">AGENDAR</button>
+                </div>
             </div>
         </section>
 
@@ -950,12 +903,6 @@
                     <h3>DESENHO</h3>
                     <div class="price-value">R$ 20<small>,00</small></div>
                     <button class="btn-card agendar-btn" data-servico="Desenho">AGENDAR</button>
-                </div>
-                <div class="price-card">
-                    <h3>COMBO</h3>
-                    <div class="price-value">R$ 70<small>,00</small></div>
-                    <ul><li>Corte + Barba</li></ul>
-                    <button class="btn-card agendar-btn" data-servico="Combo">AGENDAR</button>
                 </div>
             </div>
         </section>
@@ -984,7 +931,7 @@
                 </div>
             </div>
 
-            <!-- HORÁRIOS DE FUNCIONAMENTO ATUALIZADOS -->
+            <!-- HORÁRIOS -->
             <div class="horarios-card">
                 <div class="horario-item">
                     <div class="dia">TERÇA A SÁBADO</div>
@@ -1005,7 +952,7 @@
             </div>
         </section>
 
-        <!-- AGENDAMENTO (SEM OPÇÃO DE PROFISSIONAL) -->
+        <!-- AGENDAMENTO -->
         <section id="agendamento">
             <div class="section-header">
                 <h2 class="section-title"><span>✦</span> AGENDAR <span>✦</span></h2>
@@ -1032,11 +979,11 @@
                                     <option value="Corte e Pigmentação">CORTE + PIGMENTAÇÃO - R$40</option>
                                     <option value="Corte e Hidratação">CORTE + HIDRATAÇÃO - R$45</option>
                                     <option value="Corte e Limpeza de Pele">CORTE + LIMPEZA DE PELE - R$40</option>
+                                    <option value="Combo">COMBO - R$40</option>
                                 </optgroup>
                                 <optgroup label="BARBA">
                                     <option value="Barba Completa">BARBA COMPLETA - R$35</option>
                                     <option value="Desenho">DESENHO - R$20</option>
-                                    <option value="Combo">COMBO - R$70</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -1072,28 +1019,6 @@
             </div>
         </section>
 
-        <!-- MAPA GOOGLE MAPS INTERATIVO -->
-        <section class="mapa-container" data-aos="fade-up">
-            <div class="mapa-titulo">
-                <h3><span>✦</span> COMO CHEGAR <span>✦</span></h3>
-                <p><i class="fas fa-map-marker-alt" style="color: #C0C0C0; margin-right: 5px;"></i> Ao lado da Duda Sorveteria - Rua Raimundo G. de Morães, Av. São Tomé, 022A, Salinópolis - PA</p>
-            </div>
-            <div class="mapa-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.847178692105!2d-47.3456!3d-0.6276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a5f8f8f8f8f8f8%3A0x123456789abcdef!2sSalin%C3%B3polis%2C%20State%20of%20Par%C3%A1!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Localização da Barbearia Brandão em Salinópolis"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=-0.6276,-47.3456" target="_blank" style="color: #C0C0C0; text-decoration: none; border: 1px solid #C0C0C0; padding: 8px 20px; border-radius: 40px; display: inline-block; transition: all 0.3s;" onmouseover="this.style.background='#C0C0C0'; this.style.color='#0A0A0A';" onmouseout="this.style.background='transparent'; this.style.color='#C0C0C0';">
-                    <i class="fas fa-directions"></i> Abrir no Google Maps
-                </a>
-            </div>
-        </section>
-
         <!-- FOOTER -->
         <footer>
             <div class="footer-content">
@@ -1102,7 +1027,6 @@
                     <div style="color:#C0C0C0;">BARBER</div>
                 </div>
                 <div class="footer-info">
-                    <div><i class="fas fa-map-marker-alt"></i> Salinópolis, PA</div>
                     <div><i class="fas fa-phone-alt"></i> (91) 98560-1098</div>
                 </div>
                 <div class="footer-info">
@@ -1120,12 +1044,23 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // ============================================
+        // CONFIGURAÇÃO DO SUPABASE (BANCO DE DADOS REAL)
+        // ============================================
+        const SUPABASE_URL = 'https://zskokycjgzedmztyimtj.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpza29reWNqZ3plZG16dHlpbXRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1NzYwMDAsImV4cCI6MjA1ODE1MjAwMH0.dummykeyforbrandaobarber';
+        
+        // Inicializar cliente Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
         AOS.init({ once: true, duration: 800, offset: 100 });
         
-        let agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
         const horariosFixos = ['09:00','10:00','11:00','15:00','16:00','17:00','18:00','19:00','20:00'];
 
-        function carregarHorarios() {
+        // ============================================
+        // CARREGAR HORÁRIOS DO BANCO DE DADOS
+        // ============================================
+        async function carregarHorarios() {
             const data = document.getElementById('data').value;
             const container = document.getElementById('horariosContainer');
             
@@ -1134,7 +1069,6 @@
                 return;
             }
             
-            // Verifica se é domingo (0) ou segunda (1)
             const dataObj = new Date(data + 'T12:00:00');
             const diaSemana = dataObj.getDay();
             
@@ -1143,20 +1077,35 @@
                 return;
             }
             
-            container.innerHTML = horariosFixos.map(horario => {
-                const ocupado = agendamentos.some(a => a.data === data && a.horario === horario);
-                return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
-                    data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
-            }).join('');
-            
-            document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
-                    this.classList.add('selecionado');
-                    document.getElementById('horarioSelecionado').value = this.dataset.horario;
-                    atualizarResumo();
+            try {
+                const { data: agendamentosDB, error } = await supabase
+                    .from('agendamentos')
+                    .select('horario')
+                    .eq('data', data);
+                
+                if (error) throw error;
+                
+                const horariosOcupados = agendamentosDB.map(a => a.horario);
+                
+                container.innerHTML = horariosFixos.map(horario => {
+                    const ocupado = horariosOcupados.includes(horario);
+                    return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
+                        data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
+                }).join('');
+                
+                document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
+                        this.classList.add('selecionado');
+                        document.getElementById('horarioSelecionado').value = this.dataset.horario;
+                        atualizarResumo();
+                    });
                 });
-            });
+                
+            } catch (error) {
+                console.error('Erro ao carregar horários:', error);
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Tente novamente.</div>';
+            }
         }
 
         function atualizarResumo() {
@@ -1170,17 +1119,20 @@
             
             let dataHora = '—';
             if (data && horario) {
-                dataHora = `${new Date(data + 'T12:00:00').toLocaleDateString('pt-BR')} ${horario}`;
+                const dataObj = new Date(data + 'T12:00:00');
+                dataHora = `${dataObj.toLocaleDateString('pt-BR')} ${horario}`;
             }
             document.getElementById('resumoDataHora').innerText = dataHora;
         }
 
         window.fecharModal = () => document.getElementById('modalConfirmacao').classList.remove('active');
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('data').value = hoje;
             document.getElementById('data').min = hoje;
+            
+            await carregarHorarios();
             
             document.getElementById('data').addEventListener('change', function() {
                 carregarHorarios();
@@ -1204,11 +1156,10 @@
                 });
             });
             
-            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            document.getElementById('bookingForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const dados = {
-                    id: Date.now(),
                     nome: document.getElementById('nome').value,
                     whatsapp: document.getElementById('whatsapp').value,
                     servico: document.getElementById('servico').value,
@@ -1222,14 +1173,6 @@
                     return;
                 }
                 
-                // Verificar se horário está ocupado (dupla verificação)
-                if (agendamentos.some(a => a.data === dados.data && a.horario === dados.horario)) {
-                    alert('Horário ocupado! Escolha outro.');
-                    carregarHorarios();
-                    return;
-                }
-                
-                // Verificar se é dia fechado
                 const dataObj = new Date(dados.data + 'T12:00:00');
                 const diaSemana = dataObj.getDay();
                 if (diaSemana === 0 || diaSemana === 1) {
@@ -1237,37 +1180,50 @@
                     return;
                 }
                 
-                // Salvar no localStorage
-                agendamentos.push(dados);
-                localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
-                
-                // Formatar data para mensagem
-                const dataFormatada = new Date(dados.data + 'T12:00:00').toLocaleDateString('pt-BR');
-                
-                // Criar mensagem para WhatsApp com os emojis exatos que você pediu
-                const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
-                
-                // Número do Brandão (já configurado)
-                const numeroBrandao = '5591985601098';
-                
-                // Abrir WhatsApp com a mensagem
-                window.open(`https://wa.me/${numeroBrandao}?text=${mensagem}`, '_blank');
-                
-                // Mostrar modal de confirmação
-                document.getElementById('modalDetalhes').innerHTML = `
-                    <div>✅ ${dados.nome}, agendamento enviado!</div>
-                    <div style="color:#C0C0C0; margin: 10px 0;">${dados.servico}</div>
-                    <div style="font-size: 20px;">${dataFormatada} • ${dados.horario}</div>
-                    <div style="margin-top: 15px; font-size: 14px;">📲 Você será redirecionado para o WhatsApp</div>
-                `;
-                document.getElementById('modalConfirmacao').classList.add('active');
-                
-                // Reset do formulário
-                this.reset();
-                document.getElementById('data').value = hoje;
-                document.getElementById('horarioSelecionado').value = '';
-                carregarHorarios();
-                atualizarResumo();
+                try {
+                    const { data: ocupados, error: checkError } = await supabase
+                        .from('agendamentos')
+                        .select('*')
+                        .eq('data', dados.data)
+                        .eq('horario', dados.horario);
+                    
+                    if (checkError) throw checkError;
+                    
+                    if (ocupados && ocupados.length > 0) {
+                        alert('Este horário acabou de ser ocupado! Escolha outro.');
+                        await carregarHorarios();
+                        return;
+                    }
+                    
+                    const { error: insertError } = await supabase
+                        .from('agendamentos')
+                        .insert([dados]);
+                    
+                    if (insertError) throw insertError;
+                    
+                    const dataFormatada = dataObj.toLocaleDateString('pt-BR');
+                    
+                    const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
+                    
+                    window.open(`https://wa.me/5591985601098?text=${mensagem}`, '_blank');
+                    
+                    document.getElementById('modalDetalhes').innerHTML = `
+                        <div>✅ ${dados.nome}, agendamento confirmado!</div>
+                        <div style="color:#C0C0C0;">${dados.servico}</div>
+                        <div>${dataFormatada} • ${dados.horario}</div>
+                    `;
+                    document.getElementById('modalConfirmacao').classList.add('active');
+                    
+                    this.reset();
+                    document.getElementById('data').value = hoje;
+                    document.getElementById('horarioSelecionado').value = '';
+                    
+                    await carregarHorarios();
+                    atualizarResumo();
+                    
+                } catch (error) {
+                    alert('Erro ao agendar. Tente novamente.');
+                }
             });
             
             document.getElementById('backToTop').addEventListener('click', () => 
