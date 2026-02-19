@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- SUPABASE COM SUAS CHAVES -->
+    <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -1046,10 +1046,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================
-        // SUPABASE CONFIGURADO COM SUAS CHAVES
+        // SUPABASE COM SUAS NOVAS CHAVES
         // ============================================
-        const SUPABASE_URL = 'https://xbygekeedznbbisagsbw.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_FXUp2a_fotnBJPvuFQO-Fw_Z-NLR8sK';
+        const SUPABASE_URL = 'https://kidwmyvmcnolesacnqok.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_AYT8LT4FK0aq1Vkqniy85g_aM77G..';
         
         // Inicializar cliente Supabase
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1059,7 +1059,7 @@
         const horariosFixos = ['09:00','10:00','11:00','15:00','16:00','17:00','18:00','19:00','20:00'];
 
         // ============================================
-        // CARREGAR HORÁRIOS DO BANCO DE DADOS
+        // CARREGAR HORÁRIOS DO BANCO DE DADOS (AGORA COMPARTILHADO!)
         // ============================================
         async function carregarHorarios() {
             const data = document.getElementById('data').value;
@@ -1105,7 +1105,7 @@
                 
             } catch (error) {
                 console.error('Erro ao carregar horários:', error);
-                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Verifique a conexão.</div>';
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Verifique o banco de dados.</div>';
             }
         }
 
