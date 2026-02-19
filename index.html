@@ -11,7 +11,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* TODO SEU CSS AQUI - IGUAL AO QUE VOCÊ JÁ TEM */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
@@ -927,4 +926,452 @@
         </header>
 
         <!-- CORTES -->
-        <section
+        <section id="cortes">
+            <div class="section-header">
+                <h2 class="section-title"><span>✦</span> CORTES <span>✦</span></h2>
+                <div class="section-subtitle">Tradição e Estilo</div>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>CORTE</h3>
+                    <div class="price-value">R$ 30<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Corte">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>CABELO + BARBA</h3>
+                    <div class="price-value">R$ 40<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Cabelo e Barba">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>CORTE + PIGMENTAÇÃO</h3>
+                    <div class="price-value">R$ 40<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Corte e Pigmentação">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>CORTE + HIDRATAÇÃO</h3>
+                    <div class="price-value">R$ 45<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Corte e Hidratação">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>CORTE + LIMPEZA DE PELE</h3>
+                    <div class="price-value">R$ 40<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Corte e Limpeza de Pele">AGENDAR</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BARBA -->
+        <section id="barba">
+            <div class="section-header">
+                <h2 class="section-title"><span>✦</span> BARBA <span>✦</span></h2>
+                <div class="section-subtitle">Arte e Sofisticação</div>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>BARBA COMPLETA</h3>
+                    <div class="price-value">R$ 35<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Barba Completa">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>DESENHO</h3>
+                    <div class="price-value">R$ 20<small>,00</small></div>
+                    <button class="btn-card agendar-btn" data-servico="Desenho">AGENDAR</button>
+                </div>
+                <div class="price-card">
+                    <h3>COMBO</h3>
+                    <div class="price-value">R$ 40<small>,00</small></div>
+                    <ul><li>Corte + Barba</li></ul>
+                    <button class="btn-card agendar-btn" data-servico="Combo">AGENDAR</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFISSIONAIS -->
+        <section id="profissionais">
+            <div class="section-header">
+                <h2 class="section-title"><span>✦</span> PROFISSIONAL <span>✦</span></h2>
+                <div class="section-subtitle">Artesão da Navalha</div>
+            </div>
+            <div class="profissionais-grid">
+                <div class="profissional-card">
+                    <div class="profissional-nome">BRANDÃO</div>
+                    <div class="cargo">MASTER BARBER</div>
+                    <div style="color:#C0C0C0; font-size: 22px; margin: 20px 0;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div style="font-size: 18px; font-style: italic; color: #DDD; max-width: 400px; margin: 0 auto;">
+                        "Tradição e excelência em cada movimento. Especialista em cortes clássicos e tratamentos premium."
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="https://www.instagram.com/brandaoo__?igsh=Njc0dGV6Ymgxa2cx" target="_blank" style="color: #C0C0C0; text-decoration: none; font-size: 16px; border: 1px solid #C0C0C0; padding: 10px 25px; border-radius: 40px; display: inline-block; transition: all 0.3s;" onmouseover="this.style.background='#C0C0C0'; this.style.color='#0A0A0A';" onmouseout="this.style.background='transparent'; this.style.color='#C0C0C0';">
+                            <i class="fab fa-instagram"></i> @brandaoo__
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HORÁRIOS DE FUNCIONAMENTO -->
+            <div class="horarios-card">
+                <div class="horario-item">
+                    <div class="dia">TERÇA A SÁBADO</div>
+                    <div class="hora">09:00 — 11:00</div>
+                    <div class="hora">15:00 — 20:00</div>
+                    <span class="status ativo">ABERTO</span>
+                </div>
+                <div class="horario-item">
+                    <div class="dia">DOMINGO</div>
+                    <div class="hora">FECHADO</div>
+                    <span class="status">DESCANSO</span>
+                </div>
+                <div class="horario-item">
+                    <div class="dia">SEGUNDA</div>
+                    <div class="hora">FECHADO</div>
+                    <span class="status">DESCANSO</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AGENDAMENTO -->
+        <section id="agendamento">
+            <div class="section-header">
+                <h2 class="section-title"><span>✦</span> AGENDAR <span>✦</span></h2>
+                <div class="section-subtitle">Reserve seu horário</div>
+            </div>
+            <div class="form-container">
+                <form id="bookingForm">
+                    <div class="aviso-concorrencia">
+                        <i class="fas fa-globe"></i>
+                        <span><strong>HORÁRIOS COMPARTILHADOS:</strong> Todos os clientes veem os mesmos horários! Se alguém reservar antes, o horário fica vermelho para todo mundo.</span>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> NOME</label>
+                            <input type="text" id="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone-alt"></i> WHATSAPP</label>
+                            <input type="tel" id="whatsapp" placeholder="(91) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-cut"></i> SERVIÇO</label>
+                            <select id="servico" required>
+                                <option value="">SELECIONE</option>
+                                <optgroup label="CORTES">
+                                    <option value="Corte">CORTE - R$30</option>
+                                    <option value="Cabelo e Barba">CABELO + BARBA - R$40</option>
+                                    <option value="Corte e Pigmentação">CORTE + PIGMENTAÇÃO - R$40</option>
+                                    <option value="Corte e Hidratação">CORTE + HIDRATAÇÃO - R$45</option>
+                                    <option value="Corte e Limpeza de Pele">CORTE + LIMPEZA DE PELE - R$40</option>
+                                </optgroup>
+                                <optgroup label="BARBA">
+                                    <option value="Barba Completa">BARBA COMPLETA - R$35</option>
+                                    <option value="Desenho">DESENHO - R$20</option>
+                                    <option value="Combo">COMBO - R$70</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> DATA</label>
+                            <input type="date" id="data" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> HORÁRIO</label>
+                            <div id="horariosContainer" class="horarios-disponiveis"></div>
+                            <input type="hidden" id="horarioSelecionado">
+                            <div class="legenda-horarios">
+                                <span><span style="background:#2A5C2A; width:12px; height:12px; display:inline-block; border-radius:2px;"></span> Disponível</span>
+                                <span><span style="background:#8B3A3A; width:12px; height:12px; display:inline-block; border-radius:2px;"></span> Ocupado</span>
+                                <span><span style="background:#C0C0C0; width:12px; height:12px; display:inline-block; border-radius:2px;"></span> Selecionado</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-comment"></i> OBS</label>
+                            <textarea id="observacoes" rows="2" placeholder="Observações"></textarea>
+                        </div>
+                    </div>
+                    <div class="resumo-box">
+                        <h4>RESUMO</h4>
+                        <div id="resumoConteudo">
+                            <div class="resumo-linha"><span class="resumo-label">Cliente:</span><span class="resumo-valor" id="resumoNome">—</span></div>
+                            <div class="resumo-linha"><span class="resumo-label">Serviço:</span><span class="resumo-valor" id="resumoServico">—</span></div>
+                            <div class="resumo-linha"><span class="resumo-label">Data/Hora:</span><span class="resumo-valor" id="resumoDataHora">—</span></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">CONFIRMAR AGENDAMENTO</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- MAPA -->
+        <section class="mapa-container" data-aos="fade-up">
+            <div class="mapa-titulo">
+                <h3><span>✦</span> COMO CHEGAR <span>✦</span></h3>
+                <p><i class="fas fa-map-marker-alt" style="color: #C0C0C0; margin-right: 5px;"></i> Ao lado da Duda Sorveteria - Rua Raimundo G. de Morães, Av. São Tomé, 022A, Salinópolis - PA</p>
+            </div>
+            <div class="mapa-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.847178692105!2d-47.3456!3d-0.6276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a5f8f8f8f8f8f8%3A0x123456789abcdef!2sSalin%C3%B3polis%2C%20State%20of%20Par%C3%A1!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Localização da Barbearia Brandão em Salinópolis"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=-0.6276,-47.3456" target="_blank" style="color: #C0C0C0; text-decoration: none; border: 1px solid #C0C0C0; padding: 8px 20px; border-radius: 40px; display: inline-block; transition: all 0.3s;" onmouseover="this.style.background='#C0C0C0'; this.style.color='#0A0A0A';" onmouseout="this.style.background='transparent'; this.style.color='#C0C0C0';">
+                    <i class="fas fa-directions"></i> Abrir no Google Maps
+                </a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">BRANDÃO</div>
+                    <div style="color:#C0C0C0;">BARBER</div>
+                </div>
+                <div class="footer-info">
+                    <div><i class="fas fa-map-marker-alt"></i> Salinópolis, PA</div>
+                    <div><i class="fas fa-phone-alt"></i> (91) 98560-1098</div>
+                </div>
+                <div class="footer-info">
+                    <div><i class="fas fa-clock"></i> Ter-Sáb: 9h-11h / 15h-20h</div>
+                    <div><i class="fas fa-clock"></i> Dom/Seg: FECHADO</div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/brandaoo__?igsh=Njc0dGV6Ymgxa2cx" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/5591985601098" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copy">© 2024 BRANDÃO BARBER</div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // ============================================
+        // GOOGLE SHEETS INTEGRATION - HORÁRIOS COMPARTILHADOS
+        // ============================================
+        
+        // SUA URL DO WEB APP DO GOOGLE APPS SCRIPT (JÁ ESTÁ AQUI!)
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzJTDBAZ8MP5wBa8uGewGOqpB2pEGFv9SpWQ2TQM21K0TbBxWcBo_pE1ynuWSfpMTDRdA/exec';
+        
+        // Inicializar AOS
+        AOS.init({ once: true, duration: 800, offset: 100 });
+        
+        // Função para gerar horários de 30 em 30 minutos
+        function gerarHorariosRealistas() {
+            const horarios = [];
+            
+            // Manhã: 9h às 11h (de 30 em 30 min)
+            for (let hora = 9; hora <= 10; hora++) {
+                horarios.push(`${hora.toString().padStart(2, '0')}:00`);
+                horarios.push(`${hora.toString().padStart(2, '0')}:30`);
+            }
+            horarios.push('11:00');
+            
+            // Tarde/Noite: 15h às 20h (de 30 em 30 min)
+            for (let hora = 15; hora <= 19; hora++) {
+                horarios.push(`${hora.toString().padStart(2, '0')}:00`);
+                horarios.push(`${hora.toString().padStart(2, '0')}:30`);
+            }
+            horarios.push('20:00');
+            
+            return horarios;
+        }
+
+        const horariosFixos = gerarHorariosRealistas();
+
+        // ============================================
+        // CARREGAR HORÁRIOS DO GOOGLE SHEETS
+        // ============================================
+        async function carregarHorarios() {
+            const data = document.getElementById('data').value;
+            const container = document.getElementById('horariosContainer');
+            
+            if (!data) {
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px;">Selecione uma data</div>';
+                return;
+            }
+            
+            const dataObj = new Date(data + 'T12:00:00');
+            const diaSemana = dataObj.getDay();
+            
+            if (diaSemana === 0 || diaSemana === 1) {
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #C0C0C0;">⛔ FECHADO - Terça a Sábado</div>';
+                return;
+            }
+            
+            try {
+                // Buscar agendamentos da API
+                const response = await fetch(API_URL);
+                const agendamentosDB = await response.json();
+                
+                const horariosOcupados = agendamentosDB
+                    .filter(a => a.data === data)
+                    .map(a => a.horario);
+                
+                container.innerHTML = horariosFixos.map(horario => {
+                    const ocupado = horariosOcupados.includes(horario);
+                    return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
+                        data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
+                }).join('');
+                
+                document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
+                        this.classList.add('selecionado');
+                        document.getElementById('horarioSelecionado').value = this.dataset.horario;
+                        atualizarResumo();
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Erro ao carregar horários:', error);
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários do servidor</div>';
+            }
+        }
+
+        function atualizarResumo() {
+            const nome = document.getElementById('nome').value || '—';
+            const servicoSelect = document.getElementById('servico');
+            const servicoText = servicoSelect.options[servicoSelect.selectedIndex]?.text || '—';
+            const data = document.getElementById('data').value;
+            const horario = document.getElementById('horarioSelecionado').value;
+            
+            document.getElementById('resumoNome').innerText = nome;
+            document.getElementById('resumoServico').innerText = servicoText;
+            
+            let dataHora = '—';
+            if (data && horario) {
+                const dataObj = new Date(data + 'T12:00:00');
+                dataHora = `${dataObj.toLocaleDateString('pt-BR')} ${horario}`;
+            }
+            document.getElementById('resumoDataHora').innerText = dataHora;
+        }
+
+        window.fecharModal = () => document.getElementById('modalConfirmacao').classList.remove('active');
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Sistema com Google Sheets iniciado!');
+            
+            const hoje = new Date().toISOString().split('T')[0];
+            document.getElementById('data').value = hoje;
+            document.getElementById('data').min = hoje;
+            
+            await carregarHorarios();
+            
+            document.getElementById('data').addEventListener('change', function() {
+                carregarHorarios();
+                atualizarResumo();
+            });
+            
+            document.getElementById('nome').addEventListener('input', atualizarResumo);
+            document.getElementById('servico').addEventListener('change', atualizarResumo);
+            
+            document.querySelectorAll('.agendar-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('agendamento').scrollIntoView({ behavior: 'smooth' });
+                    const select = document.getElementById('servico');
+                    const servicoNome = this.dataset.servico;
+                    
+                    for (let option of select.options) {
+                        if (option.value === servicoNome || option.text.includes(servicoNome)) {
+                            select.value = option.value;
+                            break;
+                        }
+                    }
+                    atualizarResumo();
+                });
+            });
+            
+            document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const dados = {
+                    nome: document.getElementById('nome').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    servico: document.getElementById('servico').value,
+                    data: document.getElementById('data').value,
+                    horario: document.getElementById('horarioSelecionado').value,
+                    observacoes: document.getElementById('observacoes').value
+                };
+                
+                if (!dados.nome || !dados.whatsapp || !dados.servico || !dados.data || !dados.horario) {
+                    alert('❌ Preencha todos os campos obrigatórios!');
+                    return;
+                }
+                
+                const dataObj = new Date(dados.data + 'T12:00:00');
+                const diaSemana = dataObj.getDay();
+                if (diaSemana === 0 || diaSemana === 1) {
+                    alert('⛔ Fechado neste dia! Terça a Sábado apenas.');
+                    return;
+                }
+                
+                try {
+                    // Verificar duplicidade
+                    const response = await fetch(API_URL);
+                    const agendamentosDB = await response.json();
+                    
+                    if (agendamentosDB.some(a => a.data === dados.data && a.horario === dados.horario)) {
+                        alert('⏰ Este horário foi ocupado por outra pessoa! Escolha outro.');
+                        await carregarHorarios();
+                        return;
+                    }
+                    
+                    // Salvar no Google Sheets
+                    await fetch(API_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dados)
+                    });
+                    
+                    console.log('✅ Agendamento salvo no Google Sheets!');
+                    
+                    const dataFormatada = dataObj.toLocaleDateString('pt-BR');
+                    
+                    const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
+                    
+                    window.open(`https://wa.me/5591985601098?text=${mensagem}`, '_blank');
+                    
+                    document.getElementById('modalDetalhes').innerHTML = `
+                        <div>✅ ${dados.nome}, agendamento confirmado!</div>
+                        <div style="color:#C0C0C0; margin: 10px 0;">${dados.servico}</div>
+                        <div style="font-size: 20px;">${dataFormatada} • ${dados.horario}</div>
+                    `;
+                    document.getElementById('modalConfirmacao').classList.add('active');
+                    
+                    this.reset();
+                    document.getElementById('data').value = hoje;
+                    document.getElementById('horarioSelecionado').value = '';
+                    
+                    await carregarHorarios();
+                    atualizarResumo();
+                    
+                } catch (error) {
+                    console.error('❌ Erro no agendamento:', error);
+                    alert('Erro ao realizar agendamento. Tente novamente.');
+                }
+            });
+            
+            document.getElementById('backToTop').addEventListener('click', () => 
+                window.scrollTo({ top: 0, behavior: 'smooth' }));
+            
+            window.addEventListener('scroll', () => 
+                document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300));
+            
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    document.getElementById('modalConfirmacao').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
