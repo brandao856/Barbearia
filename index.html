@@ -14,795 +14,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* (seu CSS existente permanece igual - não vou repetir aqui para economizar espaço, 
-           mas mantenha todo o CSS que você já tinha) */
+        /* (todo seu CSS continua exatamente igual - não vou repetir pra não poluir, mas mantenha todo o CSS que você já tinha) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
         body {
             background-color: #0A0A0A;
             color: #E5E5E5;
             font-family: 'Cormorant Garamond', serif;
             line-height: 1.8;
             overflow-x: hidden;
-            position: relative;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(192,192,192,0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; position: relative; }
-        
-        /* Cores prateadas */
-        .section-title span, .since, .nav-link:hover, .price-value, 
-        .cargo, .stat-number, .resumo-box h4, .footer-info i {
-            color: #C0C0C0 !important;
-        }
-        
-        .btn-card, .btn-submit, .status.ativo {
-            background: #C0C0C0 !important;
-            color: #0A0A0A !important;
-            border-color: #C0C0C0 !important;
-        }
-        
-        .btn-card:hover {
-            background: transparent !important;
-            color: #C0C0C0 !important;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(192,192,192,0.3);
-        }
-        
-        .price-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #C0C0C0 !important;
-            box-shadow: 0 20px 40px rgba(192,192,192,0.3) !important;
-            transition: all 0.4s ease;
-        }
-        
-        /* HEADER */
-        header { padding: 20px 0 30px; text-align: center; }
-        
-        .logo-img {
-            width: 220px;
-            height: 220px;
-            object-fit: contain;
-            object-position: center;
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(192,192,192,0.35);
-            display: block;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            background-color: #0A0A0A;
-            border: 1px solid rgba(192,192,192,0.2);
-        }
-        
-        .logo-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(192,192,192,0.6);
-        }
-        
-        .since {
-            font-size: 14px;
-            letter-spacing: 8px;
-            margin-top: 20px;
-            display: inline-block;
-            padding: 8px 30px;
-            border-top: 1px solid rgba(192,192,192,0.3);
-            border-bottom: 1px solid rgba(192,192,192,0.3);
-            animation: fadeInPulse 2s infinite;
-        }
-        
-        @keyframes fadeInPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; text-shadow: 0 0 10px rgba(192,192,192,0.5); }
-        }
-        
-        /* NAVEGAÇÃO */
-        nav { margin: 30px 0; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-        nav::-webkit-scrollbar { display: none; }
-        
-        nav ul { 
-            display: inline-flex; 
-            gap: 30px; 
-            list-style: none; 
-            padding: 10px 20px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 40px;
-            border: 1px solid rgba(192,192,192,0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-link {
-            color: #FFF;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 3px;
-            padding: 8px 15px;
-            position: relative;
-            transition: all 0.3s;
-        }
-        
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: #C0C0C0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #C0C0C0;
-        }
-        
-        .nav-link:hover::before {
-            width: 80%;
-        }
-        
-        /* SEÇÕES */
-        .section-header { text-align: center; margin: 60px 0 40px; }
-        .section-title { 
-            font-size: clamp(35px, 8vw, 60px); 
-            color: #FFF; 
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title span { 
-            font-size: 45px; 
-            margin: 0 5px;
-            animation: rotateStar 3s infinite;
-            display: inline-block;
-        }
-        
-        @keyframes rotateStar {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .section-subtitle { 
-            font-size: 12px; 
-            color: #B0B0B0; 
-            letter-spacing: 5px; 
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-subtitle::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C0C0C0, transparent);
-            animation: slideLine 2s infinite;
-        }
-        
-        @keyframes slideLine {
-            0% { width: 30px; opacity: 0.3; }
-            50% { width: 80px; opacity: 1; }
-            100% { width: 30px; opacity: 0.3; }
-        }
-        
-        /* CARDS */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        
-        @media (min-width: 768px) {
-            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        
-        @media (min-width: 1024px) {
-            .pricing-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        
-        .price-card {
-            background: #111;
-            border: 1px solid rgba(192,192,192,0.1);
-            padding: 35px 25px;
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .price-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(192,192,192,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.6s;
-            transform: rotate(45deg);
-        }
-        
-        .price-card:hover::before {
-            opacity: 1;
-        }
-        
-        .price-card h3 { 
-            font-size: 28px; 
-            color: #FFF; 
-            margin-bottom: 15px; 
-            position: relative;
-            display: inline-block;
-        }
-        
-        .price-card h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: #C0C0C0;
-            transition: width 0.3s;
-        }
-        
-        .price-card:hover h3::after {
-            width: 100%;
-        }
-        
-        .price-value { 
-            font-size: 50px; 
-            font-weight: 900; 
-            margin: 20px 0;
-            text-shadow: 0 0 15px rgba(192,192,192,0.3);
-        }
-        
-        .price-value small { font-size: 18px; color: #B0B0B0; }
-        
-        .btn-card {
-            background: transparent;
-            border: 2px solid #C0C0C0;
-            color: #FFF;
-            padding: 15px;
-            width: 100%;
-            font-size: 14px;
-            letter-spacing: 3px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        
-        .btn-card::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(192,192,192,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .btn-card:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        /* PROFISSIONAIS */
-        .profissionais-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .profissional-card {
-            background: #111;
-            border: 1px solid rgba(192,192,192,0.1);
-            padding: 50px 30px;
-            text-align: center;
-            border-radius: 30px;
-            transition: all 0.5s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .profissional-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(192,192,192,0.15) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.8s;
-            transform: rotate(10deg);
-        }
-        
-        .profissional-card:hover::after {
-            opacity: 1;
-        }
-        
-        .profissional-card:hover {
-            transform: scale(1.03);
-            border-color: rgba(192,192,192,0.5);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(192,192,192,0.2);
-        }
-        
-        .profissional-nome { 
-            font-size: 48px; 
-            color: #FFF; 
-            letter-spacing: 4px; 
-            margin-bottom: 15px;
-            animation: glowText 3s infinite;
-        }
-        
-        @keyframes glowText {
-            0%, 100% { text-shadow: 0 0 10px rgba(192,192,192,0.3); }
-            50% { text-shadow: 0 0 25px rgba(192,192,192,0.7); }
-        }
-        
-        .cargo { 
-            font-size: 16px; 
-            letter-spacing: 5px; 
-            margin-bottom: 25px; 
-            padding-bottom: 20px; 
-            border-bottom: 1px solid rgba(192,192,192,0.2);
-            display: inline-block;
-        }
-        
-        /* HORÁRIOS FIXOS */
-        .horarios-card {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            background: rgba(192,192,192,0.05);
-            border: 1px solid rgba(192,192,192,0.2);
-            padding: 35px 25px;
-            border-radius: 30px;
-            margin-top: 50px;
-            backdrop-filter: blur(10px);
-        }
-        
-        @media (min-width: 768px) {
-            .horarios-card { grid-template-columns: repeat(3, 1fr); }
-        }
-        
-        .horario-item { text-align: center; position: relative; }
-        .dia { font-size: 18px; font-weight: 600; color: #C0C0C0; margin-bottom: 10px; }
-        .hora { font-size: 24px; margin-bottom: 10px; }
-        .status {
-            display: inline-block;
-            padding: 6px 20px;
-            border: 1px solid #C0C0C0;
-            font-size: 11px;
-            border-radius: 30px;
-            transition: all 0.3s;
-        }
-        .status.ativo { 
-            background: #C0C0C0; 
-            color: #0A0A0A; 
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(192,192,192,0.5); }
-            50% { box-shadow: 0 0 25px rgba(192,192,192,0.9); }
-        }
-        
-        /* FORMULÁRIO */
-        .form-container {
-            background: #111;
-            border: 1px solid rgba(192,192,192,0.2);
-            padding: 35px 25px;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .form-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(192,192,192,0.2), transparent);
-            border-radius: 32px;
-            z-index: -1;
-            animation: borderGlow 3s infinite;
-        }
-        
-        @keyframes borderGlow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .form-grid { display: grid; gap: 20px; }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #B0B0B0;
-        }
-        
-        label i { color: #C0C0C0; margin-right: 8px; }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0,0,0,0.7);
-            border: 1px solid rgba(192,192,192,0.2);
-            color: #FFF;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #C0C0C0;
-            box-shadow: 0 0 20px rgba(192,192,192,0.3);
-            transform: scale(1.02);
-        }
-        
-        /* HORÁRIOS DISPONÍVEIS */
-        .horarios-disponiveis {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-        
-        @media (min-width: 480px) {
-            .horarios-disponiveis { grid-template-columns: repeat(3, 1fr); }
-        }
-        
-        @media (min-width: 768px) {
-            .horarios-disponiveis { grid-template-columns: repeat(5, 1fr); }
-        }
-        
-        .horario-btn {
-            padding: 12px 5px;
-            border: none;
-            color: #FFF;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .horario-btn.disponivel { 
-            background: #2A5C2A; 
-            animation: glowGreen 2s infinite;
-        }
-        
-        @keyframes glowGreen {
-            0%, 100% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
-            50% { box-shadow: 0 0 15px rgba(76, 175, 80, 0.7); }
-        }
-        
-        .horario-btn.disponivel:hover {
-            background: #4CAF50;
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
-        }
-        
-        .horario-btn.indisponivel { 
-            background: #8B3A3A; 
-            cursor: not-allowed; 
-            opacity: 0.7; 
-        }
-        
-        .horario-btn.selecionado { 
-            background: #C0C0C0 !important; 
-            color: #0A0A0A; 
-            border: 2px solid #FFF; 
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(192,192,192,0.8);
-        }
-        
-        .legenda-horarios {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-            font-size: 11px;
-        }
-        
-        /* RESUMO */
-        .resumo-box {
-            margin: 30px 0;
-            padding: 25px;
-            background: rgba(192,192,192,0.05);
-            border: 1px solid rgba(192,192,192,0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .resumo-box h4 { 
-            font-size: 18px; 
-            letter-spacing: 3px; 
-            margin-bottom: 15px; 
-            animation: slideIn 1s;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .resumo-linha { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 10px 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-        }
-        
-        .resumo-linha:hover {
-            background: rgba(192,192,192,0.1);
-            padding-left: 10px;
-            padding-right: 10px;
-            border-radius: 5px;
-        }
-        
-        .resumo-label { color: #B0B0B0; }
-        .resumo-valor { color: #FFF; font-weight: 600; }
-        
-        .btn-submit {
-            background: #C0C0C0;
-            border: 2px solid #C0C0C0;
-            color: #0A0A0A;
-            padding: 18px;
-            width: 100%;
-            font-size: 16px;
-            letter-spacing: 4px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.6s;
-        }
-        
-        .btn-submit:hover {
-            background: transparent;
-            color: #C0C0C0;
-            transform: scale(1.05);
-        }
-        
-        .btn-submit:hover::before {
-            left: 100%;
-        }
-        
-        /* WHATSAPP */
-        .whatsapp-button {
-            position: fixed;
-            bottom: 20px;
-            right: 15px;
-            background: #25D366;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            text-decoration: none;
-            z-index: 100;
-            border: 2px solid white;
-            animation: whatsappPulse 2s infinite;
-            transition: all 0.3s;
-        }
-        
-        @keyframes whatsappPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
-            50% { transform: scale(1.1); box-shadow: 0 0 40px rgba(37, 211, 102, 0.9); }
-        }
-        
-        .whatsapp-button:hover {
-            transform: scale(1.15) rotate(5deg);
-            animation: none;
-        }
-        
-        /* FOOTER */
-        footer {
-            margin-top: 80px;
-            padding: 50px 0 20px;
-            border-top: 1px solid rgba(192,192,192,0.1);
-            position: relative;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            text-align: center;
-        }
-        
-        @media (min-width: 768px) {
-            .footer-content { grid-template-columns: repeat(3, 1fr); text-align: left; }
-        }
-        
-        .footer-logo {
-            font-size: 32px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #FFF, #C0C0C0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-        }
-        
-        .footer-info { font-size: 15px; color: #B0B0B0; line-height: 2; }
-        .footer-info i { color: #C0C0C0; width: 25px; }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        
-        @media (min-width: 768px) {
-            .social-links { justify-content: flex-start; }
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(192,192,192,0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FFF;
-            text-decoration: none;
-            transition: all 0.4s;
-        }
-        
-        .social-link:hover {
-            background: #C0C0C0;
-            border-color: #C0C0C0;
-            color: #0A0A0A;
-            transform: translateY(-8px) rotate(360deg);
-            box-shadow: 0 15px 30px rgba(192,192,192,0.4);
-        }
-        
-        /* BACK TO TOP */
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            left: 15px;
-            width: 45px;
-            height: 45px;
-            background: #C0C0C0;
-            border: none;
-            color: #0A0A0A;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s;
-            font-size: 18px;
-            z-index: 99;
-            border: 2px solid white;
-            box-shadow: 0 5px 15px rgba(192,192,192,0.3);
-        }
-        
-        .back-to-top.visible { opacity: 1; visibility: visible; }
-        
-        .back-to-top:hover {
-            background: #FFF;
-            transform: scale(1.1) rotate(360deg);
-        }
-        
-        /* MODAL */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s;
-            padding: 15px;
-        }
-        
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        
-        .modal {
-            background: #111;
-            border: 2px solid #C0C0C0;
-            padding: 50px 30px;
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            border-radius: 30px;
-            transform: scale(0.8);
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-        }
-        
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-        
-        .modal-icon { 
-            font-size: 70px; 
-            color: #C0C0C0; 
-            margin-bottom: 20px;
-            animation: bounce 1s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .modal h3 { font-size: 36px; color: #FFF; margin-bottom: 15px; }
-        .modal-detalhes { 
-            margin: 25px 0; 
-            padding: 20px; 
-            border-top: 1px solid rgba(192,192,192,0.3); 
-            border-bottom: 1px solid rgba(192,192,192,0.3); 
-            font-size: 18px;
-        }
-        
-        .modal-btn {
-            background: transparent;
-            border: 2px solid #C0C0C0;
-            color: #C0C0C0;
-            padding: 12px 30px;
-            font-size: 16px;
-            letter-spacing: 3px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.4s;
-        }
-        
-        .modal-btn:hover {
-            background: #C0C0C0;
-            color: #0A0A0A;
-            transform: scale(1.1);
-        }
+        /* COLE AQUI TODO O SEU CSS EXISTENTE */
+        /* ... TODO O SEU CSS ... */
     </style>
 </head>
 <body>
@@ -1048,35 +271,28 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================
-        // SUPABASE - CORRIGIDO COM SUA CHAVE ANÔNIMA
+        // SUPABASE - INICIALIZAÇÃO CORRETA
         // ============================================
-        (function() {
-            // Verifica se o supabase já foi declarado para evitar duplicidade
-            if (typeof window.supabaseClient !== 'undefined') {
-                return; // Já inicializado
-            }
-            
-            const SUPABASE_URL = 'https://kidwmyvmcnolesacnqok.supabase.co';
-            // SUA CHAVE ANÔNIMA CORRETA
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpZHdteXZtY25vbGVzYWNucW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0Njk0ODksImV4cCI6MjA4NzA0NTQ4OX0.jWVC_wjUdOaO3JegiOactbBRMIf5Dd3W5wxCYrl9T2E';
-            
-            // Inicializar cliente Supabase e armazenar globalmente
-            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            
-            console.log('Supabase inicializado com sucesso!');
-        })();
-
-        // Usar o cliente em todo o código
-        const supabase = window.supabaseClient;
+        // Configurações do Supabase
+        const SUPABASE_URL = 'https://kidwmyvmcnolesacnqok.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpZHdteXZtY25vbGVzYWNucW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0Njk0ODksImV4cCI6MjA4NzA0NTQ4OX0.jWVC_wjUdOaO3JegiOactbBRMIf5Dd3W5wxCYrl9T2E';
+        
+        // Inicializar cliente Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        console.log('✅ Supabase inicializado');
         
         // Inicializar AOS
         AOS.init({ once: true, duration: 800, offset: 100 });
         
+        // Horários fixos disponíveis
         const horariosFixos = ['09:00','10:00','11:00','15:00','16:00','17:00','18:00','19:00','20:00'];
 
         // ============================================
-        // CARREGAR HORÁRIOS DO BANCO DE DADOS
+        // FUNÇÕES DO SISTEMA
         // ============================================
+        
+        // Carregar horários do banco
         async function carregarHorarios() {
             const data = document.getElementById('data').value;
             const container = document.getElementById('horariosContainer');
@@ -1089,27 +305,34 @@
             const dataObj = new Date(data + 'T12:00:00');
             const diaSemana = dataObj.getDay();
             
+            // Verificar se é fim de semana
             if (diaSemana === 0 || diaSemana === 1) {
                 container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #C0C0C0;">⛔ FECHADO - Terça a Sábado</div>';
                 return;
             }
             
             try {
+                // Buscar agendamentos do dia
                 const { data: agendamentosDB, error } = await supabase
                     .from('agendamentos')
                     .select('horario')
                     .eq('data', data);
                 
-                if (error) throw error;
+                if (error) {
+                    console.error('Erro na consulta:', error);
+                    throw error;
+                }
                 
-                const horariosOcupados = agendamentosDB.map(a => a.horario);
+                const horariosOcupados = agendamentosDB ? agendamentosDB.map(a => a.horario) : [];
                 
+                // Criar botões de horário
                 container.innerHTML = horariosFixos.map(horario => {
                     const ocupado = horariosOcupados.includes(horario);
                     return `<button type="button" class="horario-btn ${ocupado ? 'indisponivel' : 'disponivel'}" 
                         data-horario="${horario}" ${ocupado ? 'disabled' : ''}>${horario}</button>`;
                 }).join('');
                 
+                // Adicionar eventos aos botões disponíveis
                 document.querySelectorAll('.horario-btn.disponivel').forEach(btn => {
                     btn.addEventListener('click', function() {
                         document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selecionado'));
@@ -1121,18 +344,20 @@
                 
             } catch (error) {
                 console.error('Erro ao carregar horários:', error);
-                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários. Verifique o banco de dados.</div>';
+                container.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 15px; color: #B22222;">Erro ao carregar horários</div>';
             }
         }
 
+        // Atualizar resumo do agendamento
         function atualizarResumo() {
             const nome = document.getElementById('nome').value || '—';
-            const servico = document.getElementById('servico').selectedOptions[0]?.text || '—';
+            const servicoSelect = document.getElementById('servico');
+            const servicoText = servicoSelect.options[servicoSelect.selectedIndex]?.text || '—';
             const data = document.getElementById('data').value;
             const horario = document.getElementById('horarioSelecionado').value;
             
             document.getElementById('resumoNome').innerText = nome;
-            document.getElementById('resumoServico').innerText = servico;
+            document.getElementById('resumoServico').innerText = servicoText;
             
             let dataHora = '—';
             if (data && horario) {
@@ -1142,15 +367,26 @@
             document.getElementById('resumoDataHora').innerText = dataHora;
         }
 
-        window.fecharModal = () => document.getElementById('modalConfirmacao').classList.remove('active');
+        // Fechar modal
+        window.fecharModal = function() {
+            document.getElementById('modalConfirmacao').classList.remove('active');
+        };
 
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
         document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Página carregada, iniciando...');
+            
+            // Configurar data atual
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('data').value = hoje;
             document.getElementById('data').min = hoje;
             
+            // Carregar horários iniciais
             await carregarHorarios();
             
+            // Event listeners
             document.getElementById('data').addEventListener('change', function() {
                 carregarHorarios();
                 atualizarResumo();
@@ -1159,12 +395,15 @@
             document.getElementById('nome').addEventListener('input', atualizarResumo);
             document.getElementById('servico').addEventListener('change', atualizarResumo);
             
+            // Botões de agendamento rápido nos cards
             document.querySelectorAll('.agendar-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.getElementById('agendamento').scrollIntoView({ behavior: 'smooth' });
                     const select = document.getElementById('servico');
+                    const servicoNome = this.dataset.servico;
+                    
                     for (let option of select.options) {
-                        if (option.text.includes(this.dataset.servico)) {
+                        if (option.value === servicoNome || option.text.includes(servicoNome)) {
                             select.value = option.value;
                             break;
                         }
@@ -1173,8 +412,10 @@
                 });
             });
             
+            // Submit do formulário
             document.getElementById('bookingForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
+                console.log('📝 Formulário enviado');
                 
                 const dados = {
                     nome: document.getElementById('nome').value,
@@ -1185,76 +426,105 @@
                     observacoes: document.getElementById('observacoes').value
                 };
                 
+                // Validar campos
                 if (!dados.nome || !dados.whatsapp || !dados.servico || !dados.data || !dados.horario) {
-                    alert('Preencha todos os campos!');
+                    alert('❌ Preencha todos os campos obrigatórios!');
                     return;
                 }
                 
+                // Validar dia da semana
                 const dataObj = new Date(dados.data + 'T12:00:00');
                 const diaSemana = dataObj.getDay();
                 if (diaSemana === 0 || diaSemana === 1) {
-                    alert('⛔ Fechado neste dia! Terça a Sábado apenas.');
+                    alert('⛔ Fechado neste dia! Funcionamos de Terça a Sábado.');
                     return;
                 }
                 
                 try {
+                    console.log('💾 Salvando no Supabase...', dados);
+                    
+                    // Verificar se horário ainda está disponível
                     const { data: ocupados, error: checkError } = await supabase
                         .from('agendamentos')
                         .select('*')
                         .eq('data', dados.data)
                         .eq('horario', dados.horario);
                     
-                    if (checkError) throw checkError;
+                    if (checkError) {
+                        console.error('Erro ao verificar:', checkError);
+                        throw checkError;
+                    }
                     
                     if (ocupados && ocupados.length > 0) {
-                        alert('Este horário acabou de ser ocupado! Escolha outro.');
+                        alert('⏰ Este horário acabou de ser ocupado! Escolha outro.');
                         await carregarHorarios();
                         return;
                     }
                     
+                    // Inserir no banco
                     const { error: insertError } = await supabase
                         .from('agendamentos')
                         .insert([dados]);
                     
-                    if (insertError) throw insertError;
+                    if (insertError) {
+                        console.error('Erro ao inserir:', insertError);
+                        throw insertError;
+                    }
                     
+                    console.log('✅ Agendamento salvo com sucesso!');
+                    
+                    // Formatar data para exibição
                     const dataFormatada = dataObj.toLocaleDateString('pt-BR');
                     
-                    const mensagem = `🪒 NOVO AGENDAMENTO 🪒%0A%0A👤 Cliente: ${dados.nome}%0A📞 WhatsApp: ${dados.whatsapp}%0A💈 Serviço: ${dados.servico}%0A📅 Data: ${dataFormatada}%0A⏰ Horário: ${dados.horario}%0A📝 Obs: ${dados.observacoes || 'Sem observações'}`;
+                    // Enviar WhatsApp
+                    const mensagem = `🪒 *NOVO AGENDAMENTO* 🪒%0A%0A👤 *Cliente:* ${dados.nome}%0A📞 *WhatsApp:* ${dados.whatsapp}%0A💈 *Serviço:* ${dados.servico}%0A📅 *Data:* ${dataFormatada}%0A⏰ *Horário:* ${dados.horario}%0A📝 *Obs:* ${dados.observacoes || 'Sem observações'}`;
                     
                     window.open(`https://wa.me/5591985601098?text=${mensagem}`, '_blank');
                     
+                    // Mostrar modal de confirmação
                     document.getElementById('modalDetalhes').innerHTML = `
-                        <div>✅ ${dados.nome}, agendamento confirmado!</div>
-                        <div style="color:#C0C0C0; margin: 10px 0;">${dados.servico}</div>
+                        <div>✅ ${dados.nome}, seu agendamento foi confirmado!</div>
+                        <div style="color:#C0C0C0; margin: 10px 0; font-size: 24px;">${dados.servico}</div>
                         <div style="font-size: 20px;">${dataFormatada} • ${dados.horario}</div>
                     `;
                     document.getElementById('modalConfirmacao').classList.add('active');
                     
+                    // Limpar formulário
                     this.reset();
                     document.getElementById('data').value = hoje;
                     document.getElementById('horarioSelecionado').value = '';
                     
+                    // Recarregar horários
                     await carregarHorarios();
                     atualizarResumo();
                     
                 } catch (error) {
-                    console.error('Erro ao agendar:', error);
+                    console.error('❌ Erro no agendamento:', error);
                     alert('Erro ao realizar agendamento. Tente novamente.');
                 }
             });
             
+            // Back to top
             document.getElementById('backToTop').addEventListener('click', () => 
                 window.scrollTo({ top: 0, behavior: 'smooth' }));
             
-            window.addEventListener('scroll', () => 
-                document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300));
+            window.addEventListener('scroll', () => {
+                const btn = document.getElementById('backToTop');
+                if (window.scrollY > 300) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            });
             
+            // Fechar modal com ESC
             document.addEventListener('keydown', e => {
                 if (e.key === 'Escape') {
                     document.getElementById('modalConfirmacao').classList.remove('active');
                 }
             });
+            
+            console.log('✅ Sistema inicializado com sucesso!');
         });
     </script>
 </body>
