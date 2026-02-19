@@ -14,7 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* (todo seu CSS continua igual - mantenha o que você já tem) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
@@ -1156,14 +1155,14 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================
-        // SUPABASE - CORRIGIDO (SEM DUPLICIDADE)
+        // SUPABASE - ÚNICA DECLARAÇÃO
         // ============================================
         
         // Configurações do Supabase
         const SUPABASE_URL = 'https://kidwmyvmcnolesacnqok.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpZHdteXZtY25vbGVzYWNucW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0Njk0ODksImV4cCI6MjA4NzA0NTQ4OX0.jWVC_wjUdOaO3JegiOactbBRMIf5Dd3W5wxCYrl9T2E';
         
-        // Inicializar cliente Supabase - UMA ÚNICA VEZ
+        // Inicializar cliente Supabase - APENAS UMA VEZ
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         console.log('✅ Supabase conectado - horários em tempo real!');
